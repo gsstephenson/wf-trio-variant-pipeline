@@ -56,13 +56,16 @@ trap cleanup_on_exit EXIT INT TERM
 if [[ $(hostname) == *"piel"* ]]; then
     # Running on Piel server
     DEFAULT_DATA_DIR="/data/human_trios/family1"
+    DEFAULT_SCRATCH_DIR="/scratch/${USER}"
 else
     # Running on Odysseus or other server
     DEFAULT_DATA_DIR="/mnt/data_1/CU_Boulder/MCDB-4520/data/human_trios/family1"
+    DEFAULT_SCRATCH_DIR="/mnt/work_1/${USER}/CU_Boulder/MCDB-4520"
 fi
 
 # If TRIO_DATA_DIR is set (e.g., from setup_environment.sh), use it; otherwise use detected default
 DATA_DIR="${TRIO_DATA_DIR:-${DEFAULT_DATA_DIR}}"
+SCRATCH_DIR="${TRIO_SCRATCH_DIR:-${DEFAULT_SCRATCH_DIR}}"
 CONFIG_FILE=""
 SAMPLES=()
 CHROMOSOMES=()
@@ -361,6 +364,7 @@ setup_environment() {
     log_info "═══════════════════════════════════════════════════════════"
     log_info "Output directory: ${OUTPUT_BASE}"
     log_info "Data directory: ${DATA_DIR}"
+    log_info "Scratch directory: ${SCRATCH_DIR}"
     log_info "Samples: ${SAMPLES[*]}"
     log_info "Chromosomes: ${CHROMOSOMES[*]}"
     log_info "Max threads: ${MAX_THREADS}"
@@ -482,15 +486,15 @@ run_analysis() {
     fi
     
     # Configure container engine
-    # Use /scratch for tmp dir since it has much more space than /tmp (2.3T vs 490M available)
-    # and we have write permissions there. Create unique tmp dir per run for easier cleanup.
+    # Use scratch directory for tmp dir since it has more space than /tmp
+    # Create unique tmp dir per run for easier cleanup.
     local timestamp=$(date +"%Y%m%d_%H%M%S")
     
     if [ "${CONTAINER_ENGINE}" = "apptainer" ]; then
         nf_cmd="${nf_cmd} -profile apptainer"
         export NXF_APPTAINER_CACHEDIR="${HOME}/.apptainer/cache"
         export APPTAINER_CACHEDIR="${HOME}/.apptainer/cache"
-        export APPTAINER_TMPDIR="/scratch/${USER}/.apptainer_tmp_${timestamp}"
+        export APPTAINER_TMPDIR="${SCRATCH_DIR}/.apptainer_tmp_${timestamp}"
         CONTAINER_TMP_DIR="${APPTAINER_TMPDIR}"
         mkdir -p "${APPTAINER_TMPDIR}"
         log_info "Using apptainer profile"
@@ -499,7 +503,7 @@ run_analysis() {
         nf_cmd="${nf_cmd} -profile singularity"
         export NXF_SINGULARITY_CACHEDIR="${HOME}/.nextflow/singularity"
         export SINGULARITY_CACHEDIR="${HOME}/.singularity/cache"
-        export SINGULARITY_TMPDIR="/scratch/${USER}/.singularity_tmp_${timestamp}"
+        export SINGULARITY_TMPDIR="${SCRATCH_DIR}/.singularity_tmp_${timestamp}"
         CONTAINER_TMP_DIR="${SINGULARITY_TMPDIR}"
         mkdir -p "${SINGULARITY_TMPDIR}"
         log_info "Using singularity profile"

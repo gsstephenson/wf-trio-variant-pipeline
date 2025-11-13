@@ -1,3 +1,26 @@
+# Version 4.1 - Odysseus Scratch Directory Fix
+
+**Release Date:** November 13, 2025
+
+## Bug Fixes
+
+### Fixed Apptainer Temporary Directory Issue on Odysseus
+- **Problem**: Script attempted to use `/scratch` directory which doesn't exist on Odysseus
+- **Solution**: Environment-specific scratch directory detection:
+  - **Piel server**: Uses `/scratch/${USER}` (as before)
+  - **Odysseus**: Uses `/mnt/work_1/${USER}/CU_Boulder/MCDB-4520`
+  - **Custom**: Uses `$(pwd)/tmp` as fallback
+- **Impact**: Eliminates "no such file or directory" errors during container image pulls on Odysseus
+- **New Feature**: Added `TRIO_SCRATCH_DIR` environment variable for manual override
+
+### Technical Details
+- `setup_environment.sh` now exports `TRIO_SCRATCH_DIR` for each environment
+- `wf_trio_analysis.sh` uses `${SCRATCH_DIR}` instead of hardcoded `/scratch` paths
+- Container temporary directories now created in environment-appropriate locations
+- Maintains full backward compatibility with Piel server setup
+
+---
+
 # Version 4.0 - Production-Ready Cross-Platform Release
 
 **Release Date:** November 13, 2025
@@ -52,6 +75,12 @@ source setup_environment.sh
 ```
 
 ## Version History
+
+### v4.1 (2025-11-13) - Odysseus Scratch Directory Fix
+- **Fixed**: Apptainer failing due to missing `/scratch` directory on Odysseus
+- **Environment-Specific Scratch Paths**: Auto-detects correct temp directory per server
+- **New Variable**: `TRIO_SCRATCH_DIR` for manual scratch directory override
+- **Tested**: Verified on both Piel (singularity + /scratch) and Odysseus (apptainer + /mnt/work_1)
 
 ### v4.0 (2025-11-13) - Production-Ready Cross-Platform Release
 - **Automatic Container Engine Detection**: Auto-detects and uses `singularity` on Piel, `apptainer` on Odysseus
