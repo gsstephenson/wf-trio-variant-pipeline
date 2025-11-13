@@ -1,0 +1,65 @@
+# Nextflow metadata and cache
+.nextflow/
+.nextflow.log*
+work/
+.nextflow.*
+
+# Output directories
+HG002_chr1/output/
+HG003_chr1/output/
+HG004_chr1/output/
+
+# Work directories
+HG002_chr1/work/
+HG003_chr1/work/
+HG004_chr1/work/
+
+# Log directories
+HG002_chr1/logs/
+HG003_chr1/logs/
+HG004_chr1/logs/
+
+# Master pipeline logs
+pipeline_master_*.log
+
+# Nextflow reports
+*.html
+trace.txt
+timeline.html
+report.html
+dag.html
+
+# Data files (too large for git)
+*.bam
+*.bai
+*.fa
+*.fai
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+
+# VCF files (variant calls - can be large)
+*.vcf
+*.vcf.gz
+*.vcf.gz.tbi
+*.bcf
+
+# Compressed archives
+*.tar.gz
+*.zip
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
