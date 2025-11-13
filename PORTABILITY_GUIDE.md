@@ -8,13 +8,13 @@
 source setup_environment.sh
 
 # Then run analysis
-./run_flexible_analysis.sh --all -t 16
+./wf_trio_analysis.sh --all -t 16
 ```
 
 ### Option 2: Manual Override
 ```bash
 # Run with explicit paths (works on any system)
-./run_flexible_analysis.sh \
+./wf_trio_analysis.sh \
     --data-dir /data/human_trios/family1 \
     --all \
     -t 16
@@ -35,7 +35,7 @@ source setup_environment.sh
 ```bash
 # Auto-detected, just source:
 source setup_environment.sh
-./run_flexible_analysis.sh --all
+./wf_trio_analysis.sh --all
 ```
 
 ---
@@ -52,7 +52,7 @@ source setup_environment.sh
 # On Piel server:
 cd /scratch/$USER/trio_project
 source setup_environment.sh
-./run_flexible_analysis.sh --all -t 32
+./wf_trio_analysis.sh --all -t 32
 ```
 
 **Important Notes:**
@@ -79,7 +79,7 @@ export TRIO_DATA_DIR=/your/custom/path/to/data
 export TRIO_PROJECT_DIR=/your/custom/project/path
 
 # Then run:
-./run_flexible_analysis.sh --all
+./wf_trio_analysis.sh --all
 ```
 
 ---
@@ -87,7 +87,7 @@ export TRIO_PROJECT_DIR=/your/custom/project/path
 ## Hardcoded Path Issues (Legacy Scripts)
 
 ### ✅ Fixed Scripts:
-- `run_flexible_analysis.sh` - Uses environment variables + `--data-dir` flag
+- `wf_trio_analysis.sh` - Uses environment variables + `--data-dir` flag
 - `setup_environment.sh` - Auto-detection system
 
 ### ⚠️ Legacy Scripts (Avoid for Portability):
@@ -95,7 +95,7 @@ These scripts have hardcoded paths and should only be used on ODYSSEUS:
 
 1. **`run_trio_analysis.sh`** - Original v1 script
    - Hardcoded: `/mnt/work_1/` and `/mnt/data_1/`
-   - **Use v2 (`run_flexible_analysis.sh`) instead**
+   - **Use v2 (`wf_trio_analysis.sh`) instead**
 
 2. **`summarize_performance.sh`** 
    - Hardcoded: `/mnt/work_1/gest9386/CU_Boulder/MCDB-4520/project`
@@ -126,7 +126,7 @@ ls /data/human_trios/
 
 # 3. Setup and run
 source setup_environment.sh
-./run_flexible_analysis.sh --all -t 32
+./wf_trio_analysis.sh --all -t 32
 
 # 4. Check results
 ls HG002_chr1/output/
@@ -142,7 +142,7 @@ source setup_environment.sh
 ./download_all_chromosomes.sh  # or edit paths first!
 
 # 3. Run analysis
-./run_flexible_analysis.sh --all -t $(nproc)
+./wf_trio_analysis.sh --all -t $(nproc)
 ```
 
 ### Running with Custom Paths
@@ -152,7 +152,7 @@ export TRIO_DATA_DIR=/my/custom/data/location
 export TRIO_PROJECT_DIR=$(pwd)
 
 # Or use flags directly:
-./run_flexible_analysis.sh \
+./wf_trio_analysis.sh \
     --data-dir /my/custom/data/location \
     --sample HG002 \
     --chromosome chr1 \
@@ -202,7 +202,7 @@ ls $TRIO_DATA_DIR
 # Override if needed:
 export TRIO_DATA_DIR=/correct/path
 # OR
-./run_flexible_analysis.sh --data-dir /correct/path --all
+./wf_trio_analysis.sh --data-dir /correct/path --all
 ```
 
 ### "Permission denied" on Piel
@@ -220,7 +220,7 @@ ls -la $TRIO_DATA_DIR
 nproc
 
 # Use appropriate thread count:
-./run_flexible_analysis.sh --all -t 16  # or whatever is reasonable
+./wf_trio_analysis.sh --all -t 16  # or whatever is reasonable
 ```
 
 ---
@@ -232,20 +232,20 @@ nproc
    source setup_environment.sh
    ```
 
-2. **Use the v2 flexible pipeline** (`run_flexible_analysis.sh`)
+2. **Use the v2 flexible pipeline** (`wf_trio_analysis.sh`)
    - Has environment variable support
    - Has `--data-dir` flag
    - More portable
 
 3. **Test with dry-run first**
    ```bash
-   ./run_flexible_analysis.sh --all --dry-run
+   ./wf_trio_analysis.sh --all --dry-run
    ```
 
 4. **Document your environment in logs**
    ```bash
    source setup_environment.sh > my_run_environment.log
-   ./run_flexible_analysis.sh --all 2>&1 | tee -a my_run_environment.log
+   ./wf_trio_analysis.sh --all 2>&1 | tee -a my_run_environment.log
    ```
 
 5. **For group members: Provide clear instructions**
@@ -267,7 +267,7 @@ echo "Data: $TRIO_DATA_DIR"
 echo "Project: $TRIO_PROJECT_DIR"
 
 # Step 3: Run
-./run_flexible_analysis.sh --all -t $(nproc)
+./wf_trio_analysis.sh --all -t $(nproc)
 ```
 
 **❌ Avoid:**

@@ -51,7 +51,7 @@ cd NEXTFLOW_trio-variant-analysis-chr1
 source setup_environment.sh
 
 # 3. Run analysis (example: HG002 on chr1)
-./run_flexible_analysis.sh -s HG002 -c chr1 -o ./my_results
+./wf_trio_analysis.sh -s HG002 -c chr1 -o ./my_results
 
 # Data is already on Piel at: /data/human_trios
 ```
@@ -67,7 +67,7 @@ cd NEXTFLOW_trio-variant-analysis-chr1
 source setup_environment.sh
 
 # 3. If data not available, specify location
-./run_flexible_analysis.sh \
+./wf_trio_analysis.sh \
     --data-dir /path/to/your/data \
     -s HG002 -c chr1 \
     -o ./my_results
@@ -128,38 +128,38 @@ chmod +x *.sh
 source setup_environment.sh
 
 # Single sample, single chromosome
-./run_flexible_analysis.sh -s HG002 -c chr1 -o ./output
+./wf_trio_analysis.sh -s HG002 -c chr1 -o ./output
 ```
 
 ### Advanced Usage
 
 ```bash
 # Multiple samples
-./run_flexible_analysis.sh -s HG002 -s HG003 -c chr1 -o ./output
+./wf_trio_analysis.sh -s HG002 -s HG003 -c chr1 -o ./output
 
 # Multiple chromosomes
-./run_flexible_analysis.sh -s HG002 -c chr1 -c chr2 -c chr3 -o ./output
+./wf_trio_analysis.sh -s HG002 -c chr1 -c chr2 -c chr3 -o ./output
 
 # All samples on one chromosome (family trio analysis)
-./run_flexible_analysis.sh --all-samples -c chr1 -o ./trio_chr1
+./wf_trio_analysis.sh --all-samples -c chr1 -o ./trio_chr1
 
 # One sample across all available chromosomes
-./run_flexible_analysis.sh -s HG002 --all-chromosomes -o ./HG002_genome
+./wf_trio_analysis.sh -s HG002 --all-chromosomes -o ./HG002_genome
 
 # Everything (WARNING: Long runtime!)
-./run_flexible_analysis.sh --all -o ./complete_analysis
+./wf_trio_analysis.sh --all -o ./complete_analysis
 
 # Control thread usage
-./run_flexible_analysis.sh -s HG002 -c chr1 -o ./output -t 16
+./wf_trio_analysis.sh -s HG002 -c chr1 -o ./output -t 16
 
 # Test before running (dry-run mode)
-./run_flexible_analysis.sh --dry-run -s HG002 -c chr1 -o ./output
+./wf_trio_analysis.sh --dry-run -s HG002 -c chr1 -o ./output
 ```
 
 ### Get Help
 
 ```bash
-./run_flexible_analysis.sh --help
+./wf_trio_analysis.sh --help
 ```
 
 ---
@@ -252,7 +252,7 @@ This repository includes comprehensive documentation:
 
 ### Scripts
 - **`setup_environment.sh`** - Auto-detects your environment and sets paths
-- **`run_flexible_analysis.sh`** - Main pipeline script (v3.0)
+- **`wf_trio_analysis.sh`** - Main pipeline script (v3.0)
 - **`smoke_test.sh`** - Validation suite (41 tests)
 - **`summarize_performance.sh`** - Extract performance statistics
 - **`download_all_chromosomes.sh`** - Bulk data download utility
@@ -286,7 +286,7 @@ This repository includes comprehensive documentation:
 Test your command without running the analysis:
 
 ```bash
-./run_flexible_analysis.sh --dry-run -s HG002 -c chr1 -o ./test
+./wf_trio_analysis.sh --dry-run -s HG002 -c chr1 -o ./test
 ```
 
 This shows exactly what would be executed without actually running it.
@@ -343,7 +343,7 @@ According to project directive:
 ### Trio Analysis Workflow
 ```bash
 # 1. Run all three samples on chr1
-./run_flexible_analysis.sh --all-samples -c chr1 -o ./trio_chr1
+./wf_trio_analysis.sh --all-samples -c chr1 -o ./trio_chr1
 
 # 2. Compare VCF files
 # - Load HG002_chr1.wf_snp.vcf.gz
@@ -371,7 +371,7 @@ According to project directive:
 ls $TRIO_DATA_DIR
 
 # Override if needed
-./run_flexible_analysis.sh --data-dir /correct/path -s HG002 -c chr1 -o ./output
+./wf_trio_analysis.sh --data-dir /correct/path -s HG002 -c chr1 -o ./output
 ```
 
 #### "Permission denied"
@@ -399,13 +399,13 @@ export PATH=$PATH:/path/to/nextflow
 cat SAMPLE_CHROMOSOME/logs/nextflow_*.log
 
 # Resume from checkpoint (if Nextflow supports)
-./run_flexible_analysis.sh --resume -s HG002 -c chr1 -o ./output
+./wf_trio_analysis.sh --resume -s HG002 -c chr1 -o ./output
 ```
 
 #### Out of memory errors
 ```bash
 # Use fewer threads
-./run_flexible_analysis.sh -s HG002 -c chr1 -o ./output -t 8
+./wf_trio_analysis.sh -s HG002 -c chr1 -o ./output -t 8
 
 # Edit nextflow.config to reduce memory allocation
 ```
@@ -444,7 +444,7 @@ See [PORTABILITY_GUIDE.md](PORTABILITY_GUIDE.md) for detailed cross-platform ins
 ## FAQ
 
 **Q: Which version should I use?**  
-A: Use v3.0 (`run_flexible_analysis.sh`) - it's the most flexible and portable.
+A: Use v3.0 (`wf_trio_analysis.sh`) - it's the most flexible and portable.
 
 **Q: Can I run this on my laptop?**  
 A: Yes, if you have Nextflow and the data files. Use `setup_environment.sh` and specify your data location.

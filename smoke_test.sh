@@ -16,7 +16,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-FLEXIBLE_SCRIPT="${SCRIPT_DIR}/run_flexible_analysis.sh"
+FLEXIBLE_SCRIPT="${SCRIPT_DIR}/wf_trio_analysis.sh"
 TEST_OUTPUT_DIR="${SCRIPT_DIR}/smoke_test_output"
 DATA_DIR="/mnt/data_1/CU_Boulder/MCDB-4520/data/human_trios/family1"
 
@@ -405,10 +405,10 @@ else
 fi
 
 ((TOTAL_TESTS++))
-print_test "${TOTAL_TESTS}" "TRIO_DATA_DIR override works in run_flexible_analysis.sh"
+print_test "${TOTAL_TESTS}" "TRIO_DATA_DIR override works in wf_trio_analysis.sh"
 # Test that TRIO_DATA_DIR is respected
 export TRIO_DATA_DIR="/custom/test/path"
-OUTPUT=$(./run_flexible_analysis.sh --help 2>&1)
+OUTPUT=$(./wf_trio_analysis.sh --help 2>&1)
 # The script should run without error even with custom TRIO_DATA_DIR
 if [[ $? -eq 0 ]]; then
     test_passed
@@ -421,7 +421,7 @@ unset TRIO_DATA_DIR
 print_test "${TOTAL_TESTS}" "Default DATA_DIR fallback works when TRIO_DATA_DIR unset"
 # Ensure the script falls back to hardcoded default
 unset TRIO_DATA_DIR
-OUTPUT=$(./run_flexible_analysis.sh --help 2>&1)
+OUTPUT=$(./wf_trio_analysis.sh --help 2>&1)
 if [[ $? -eq 0 ]]; then
     test_passed
 else
@@ -432,7 +432,7 @@ fi
 print_test "${TOTAL_TESTS}" "--data-dir flag overrides TRIO_DATA_DIR"
 # Explicit flag should take precedence
 export TRIO_DATA_DIR="/env/var/path"
-OUTPUT=$(./run_flexible_analysis.sh --data-dir /explicit/flag/path --dry-run --sample HG002 --chromosome chr1 --output /tmp/override_test 2>&1)
+OUTPUT=$(./wf_trio_analysis.sh --data-dir /explicit/flag/path --dry-run --sample HG002 --chromosome chr1 --output /tmp/override_test 2>&1)
 EXIT_CODE=$?
 # Should not error out and should use the explicit flag path
 if [[ $EXIT_CODE -eq 0 ]] && echo "$OUTPUT" | grep -q "/explicit/flag/path"; then

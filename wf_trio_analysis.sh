@@ -6,7 +6,7 @@
 # A parameterized pipeline for running wf-human-variation on any combination
 # of family members and chromosomes.
 #
-# Usage: ./run_flexible_analysis.sh [OPTIONS]
+# Usage: ./wf_trio_analysis.sh [OPTIONS]
 #
 # Version: 3.0 (Portability Release)
 # Author: gsstephenson
@@ -61,7 +61,7 @@ show_help() {
     echo ""
     cat << 'EOF'
 USAGE:
-    run_flexible_analysis.sh [OPTIONS]
+    wf_trio_analysis.sh [OPTIONS]
 
 REQUIRED OPTIONS:
     -o, --output DIR
@@ -105,31 +105,31 @@ OPTIONAL FLAGS:
 
 EXAMPLES:
     # Analyze HG002 on chromosome 1
-    ./run_flexible_analysis.sh -s HG002 -c chr1 -o /path/to/output
+    ./wf_trio_analysis.sh -s HG002 -c chr1 -o /path/to/output
 
     # Analyze all three family members on chromosome 17
-    ./run_flexible_analysis.sh --all-samples -c chr17 -o /path/to/output
+    ./wf_trio_analysis.sh --all-samples -c chr17 -o /path/to/output
 
     # Analyze HG002 on multiple chromosomes
-    ./run_flexible_analysis.sh -s HG002 -c chr1 -c chr13 -c chr17 -o /path/to/output
+    ./wf_trio_analysis.sh -s HG002 -c chr1 -c chr13 -c chr17 -o /path/to/output
 
     # Analyze two samples on chromosome 1
-    ./run_flexible_analysis.sh -s HG002 -s HG003 -c chr1 -o /path/to/output
+    ./wf_trio_analysis.sh -s HG002 -s HG003 -c chr1 -o /path/to/output
 
     # Run complete trio analysis on all chromosomes
-    ./run_flexible_analysis.sh --all -o /path/to/output
+    ./wf_trio_analysis.sh --all -o /path/to/output
 
     # Analyze father on all chromosomes
-    ./run_flexible_analysis.sh -s HG003 --all-chromosomes -o /path/to/output
+    ./wf_trio_analysis.sh -s HG003 --all-chromosomes -o /path/to/output
 
     # Limit to 8 threads (for smaller machines)
-    ./run_flexible_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 8
+    ./wf_trio_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 8
 
     # Use maximum threads (auto-detected if -t not specified)
-    ./run_flexible_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 32
+    ./wf_trio_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 32
 
     # Use specific thread count for smaller machine
-    ./run_flexible_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 8
+    ./wf_trio_analysis.sh -s HG002 -c chr1 -o /path/to/output -t 8
 
 OUTPUT STRUCTURE:
     OUTPUT_DIR/

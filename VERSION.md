@@ -16,7 +16,7 @@
   - Custom environments (user-defined paths)
 
 ### Enhanced Configuration
-- `run_flexible_analysis.sh` now respects `TRIO_DATA_DIR` environment variable
+- `wf_trio_analysis.sh` now respects `TRIO_DATA_DIR` environment variable
 - Maintains backward compatibility with hardcoded defaults
 - `--data-dir` flag still overrides all other settings
 
@@ -42,7 +42,7 @@ No changes required! Existing workflows continue to work.
 To use new portability features:
 ```bash
 source setup_environment.sh
-./run_flexible_analysis.sh --all
+./wf_trio_analysis.sh --all
 ```
 
 ## Version History
