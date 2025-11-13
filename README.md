@@ -44,8 +44,8 @@ Automated pipeline for **Oxford Nanopore long-read variant analysis** of human f
 ```bash
 # 1. Clone repository
 cd /scratch/$USER
-git clone https://github.com/gsstephenson/NEXTFLOW_trio-variant-analysis-chr1.git
-cd NEXTFLOW_trio-variant-analysis-chr1
+git clone https://github.com/gsstephenson/wf-trio-variant-pipeline.git
+cd wf-trio-variant-pipeline
 
 # 2. Setup environment (auto-detects Piel)
 source setup_environment.sh
@@ -60,8 +60,8 @@ source setup_environment.sh
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/gsstephenson/NEXTFLOW_trio-variant-analysis-chr1.git
-cd NEXTFLOW_trio-variant-analysis-chr1
+git clone https://github.com/gsstephenson/wf-trio-variant-pipeline.git
+cd wf-trio-variant-pipeline
 
 # 2. Setup environment (auto-detects your system)
 source setup_environment.sh
@@ -107,8 +107,8 @@ See [PORTABILITY_GUIDE.md](PORTABILITY_GUIDE.md) for detailed setup instructions
 
 ```bash
 # Clone this repository
-git clone https://github.com/gsstephenson/NEXTFLOW_trio-variant-analysis-chr1.git
-cd NEXTFLOW_trio-variant-analysis-chr1
+git clone https://github.com/gsstephenson/wf-trio-variant-pipeline.git
+cd wf-trio-variant-pipeline
 
 # Make scripts executable
 chmod +x *.sh
@@ -495,9 +495,9 @@ This pipeline setup is for educational use in MCDB 4520/5520. The underlying `wf
 
 ## Repository
 
-**GitHub:** [gsstephenson/NEXTFLOW_trio-variant-analysis-chr1](https://github.com/gsstephenson/NEXTFLOW_trio-variant-analysis-chr1)
+**GitHub:** [gsstephenson/wf-trio-variant-pipeline](https://github.com/gsstephenson/wf-trio-variant-pipeline)
 
 **Quick Clone:**
 ```bash
-git clone https://github.com/gsstephenson/NEXTFLOW_trio-variant-analysis-chr1.git
+git clone https://github.com/gsstephenson/wf-trio-variant-pipeline.git
 ```

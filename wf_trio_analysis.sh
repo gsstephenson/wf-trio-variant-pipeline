@@ -10,7 +10,7 @@
 #
 # Version: 3.0 (Portability Release)
 # Author: gsstephenson
-# Repository: NEXTFLOW_trio-variant-analysis-chr1
+# Repository: wf-trio-variant-pipeline
 #############################################################################
 
 set -e  # Exit on error
