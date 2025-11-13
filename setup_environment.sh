@@ -8,7 +8,7 @@
 if [[ $(hostname) == *"piel"* ]]; then
     # Running on Piel server
     export TRIO_ENV="piel"
-    export TRIO_DATA_DIR="/data/human_trios"
+    export TRIO_DATA_DIR="/data/human_trios/family1"
     export TRIO_PROJECT_DIR="/scratch/${USER}/trio_project"
     echo "Detected: Piel server environment"
 elif [[ -d "/mnt/data_1/CU_Boulder" ]]; then
